@@ -60,7 +60,7 @@
         <div class="container-fluid">
             <a class="navbar-brand" href="#">FI DEV2 - Dév<span class="hidden-xs">eloppement</span> Web</a>
             <ul class="nav navbar-nav navbar-right">
-                <li><a class="btn btn-light" href="https://github.com/brunosimon/fi-dev2" target="_blank">GitHub</a></li>
+                <li><a class="btn btn-light" href="https://github.com/brunosimon/ecole-multimedia-fi-dev2" target="_blank">GitHub</a></li>
             </ul>
         </div>
     </nav>
