@@ -1,6 +1,7 @@
 import * as THREE from 'three'
 import { OrbitControls } from 'three/examples/jsm/controls/OrbitControls.js'
 import grassColorImageSource from './assets/images/grass-1/color.jpg'
+import brickColorImageSource from './assets/images/bricks/color.jpg'
 
 /**
  * Textures
@@ -8,25 +9,15 @@ import grassColorImageSource from './assets/images/grass-1/color.jpg'
 const textureLoader = new THREE.TextureLoader()
 
 const grassColorTexture = textureLoader.load(grassColorImageSource)
+grassColorTexture.wrapS = THREE.RepeatWrapping
+grassColorTexture.wrapT = THREE.RepeatWrapping
+grassColorTexture.repeat.x = 4
+grassColorTexture.repeat.y = 4
 
-// grassColorTexture.wrapS = THREE.RepeatWrapping
-// grassColorTexture.wrapT = THREE.RepeatWrapping
-// grassColorTexture.repeat.x = 4
-// grassColorTexture.repeat.y = 4
+const brickColorTexture = textureLoader.load(brickColorImageSource)
+brickColorTexture.repeat.x = 0.8
+brickColorTexture.repeat.y = 0.5
 
-// grassColorTexture.rotation = Math.PI * 0.5
-// grassColorTexture.center.x = 0.5
-// grassColorTexture.center.y = 0.5
-
-// grassColorTexture.magFilter = THREE.LinearFilter // Default
-// grassColorTexture.magFilter = THREE.NearestFilter
-
-grassColorTexture.minFilter = THREE.LinearMipmapLinearFilter // Default
-// grassColorTexture.minFilter = THREE.LinearMipmapNearestFilter
-// grassColorTexture.minFilter = THREE.LinearFilter
-// grassColorTexture.minFilter = THREE.NearestFilter
-// grassColorTexture.minFilter = THREE.NearestMipmapNearestFilter
-// grassColorTexture.minFilter = THREE.NearestMipmapLinearFilter
 
 /**
  * Scene
@@ -86,7 +77,7 @@ houseGroup.add(grass)
 
 const walls = new THREE.Mesh(
     new THREE.BoxGeometry(5, 2.5, 5, 1, 1, 1),
-    new THREE.MeshBasicMaterial({ color: 0xffcc99 })
+    new THREE.MeshBasicMaterial({ map: brickColorTexture })
 )
 walls.position.y = 1.25
 houseGroup.add(walls)
