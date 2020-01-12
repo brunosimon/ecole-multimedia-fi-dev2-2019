@@ -2,7 +2,7 @@
 <html lang="fr">
     <head>
         <meta charset="utf-8">
-        <title>TRIM 2 - WebGL - Three.js</title>
+        <title>Cours 01 - WebGL - Three.js</title>
         <meta name="description" content="">
         <meta name="author" content="Bruno Simon">
         <meta name="apple-mobile-web-app-capable" content="yes">
@@ -32,8 +32,8 @@
                     <h1>WebGL</h1>
                     <h3>Cours 01 - Basics</h3>
                     <ul>
-                        <li>github :<br><a target="_blank" href="https://github.com/brunosimon/hetic-p2022">github.com/brunosimon/ecole-multimedia-fi-dev2</a></li>
-                        <li>site :<br><a target="_blank" href="http://bruno-simon.com/hetic/p2022/">bruno-simon.com/ecole-multimedia/fi-dev2/</a></li>
+                        <li>github :<br><a target="_blank" href="https://github.com/brunosimon/ecole-multimedia-fi-dev2">github.com/brunosimon/ecole-multimedia-fi-dev2</a></li>
+                        <li>site :<br><a target="_blank" href="http://bruno-simon.com/ecole-multimedia/fi-dev2/">bruno-simon.com/ecole-multimedia/fi-dev2/</a></li>
                         <li>contact :<br><a target="_blank" mailto="simon.bruno.77@gmail.com">simon.bruno.77@gmail.com</a></li>
                     </ul>
                 </section>
@@ -733,56 +733,56 @@ house.add(walls)
 /**
  * House
  */
-const house = new THREE.Object3D()
-scene.add(house)
+const houseGroup = new THREE.Group()
+scene.add(houseGroup)
 
-const floor = new THREE.Mesh(
-    new THREE.PlaneGeometry(4, 4, 1, 1),
+const grass = new THREE.Mesh(
+    new THREE.PlaneGeometry(15, 15, 1, 1),
     new THREE.MeshBasicMaterial({ color: 0x66bb66 })
 )
-floor.rotation.x = - Math.PI * 0.5
-floor.position.y = - 0.5
-house.add(floor)
+grass.rotation.x = - Math.PI * 0.5
+houseGroup.add(grass)
 
 const walls = new THREE.Mesh(
-    new THREE.BoxGeometry(1.5, 1, 1.5),
+    new THREE.BoxGeometry(5, 2.5, 5, 1, 1, 1),
     new THREE.MeshBasicMaterial({ color: 0xffcc99 })
 )
-house.add(walls)
+walls.position.y = 1.25
+houseGroup.add(walls)
 
 const roof = new THREE.Mesh(
-    new THREE.ConeGeometry(1.2, 0.6, 0.04),
+    new THREE.ConeGeometry(4.1, 1, 4),
     new THREE.MeshBasicMaterial({ color: 0x885522 })
 )
-roof.position.y += 0.8
+roof.position.y += 2.5 + 1 * 0.5
 roof.rotation.y += Math.PI * 0.25
-house.add(roof)
+houseGroup.add(roof)
 
 const door = new THREE.Mesh(
-    new THREE.BoxGeometry(0.02, 0.4, 0.2),
+    new THREE.BoxGeometry(0.2, 2, 1),
     new THREE.MeshBasicMaterial({ color: 0xff8866 })
 )
-door.position.x = - 0.76
-door.position.y = - 0.3
-house.add(door)
+door.position.x = - 2.5
+door.position.y = 1
+houseGroup.add(door)
 
 const bush1 = new THREE.Mesh(
-    new THREE.SphereGeometry(0.1, 0.32, 0.32),
+    new THREE.SphereGeometry(0.5, 32, 32),
     new THREE.MeshBasicMaterial({ color: 0x228833 })
 )
-bush1.position.x = - 0.8
-bush1.position.z = 0.2
-bush1.position.y = - 0.45
-house.add(bush1)
+bush1.position.x = - 2.8
+bush1.position.z = 1
+bush1.position.y = 0.2
+houseGroup.add(bush1)
 
 const bush2 = new THREE.Mesh(
-    new THREE.SphereGeometry(0.08, 32, 32),
+    new THREE.SphereGeometry(0.4, 32, 32),
     new THREE.MeshBasicMaterial({ color: 0x228833 })
 )
-bush2.position.x = - 0.8
-bush2.position.z = - 0.2
-bush2.position.y = - 0.48
-house.add(bush2)
+bush2.position.x = - 2.8
+bush2.position.z = - 0.8
+bush2.position.y = 0.15
+houseGroup.add(bush2)
                         </code></pre>
                     </div>
                 </section>
