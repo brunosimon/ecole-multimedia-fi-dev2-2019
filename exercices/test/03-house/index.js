@@ -1,4 +1,5 @@
 import * as THREE from 'three'
+import { OrbitControls } from 'three/examples/jsm/controls/OrbitControls.js'
 
 /**
  * Scene
@@ -91,7 +92,6 @@ bush2.position.z = - 0.8
 bush2.position.y = 0.15
 houseGroup.add(bush2)
 
-
 /**
  * Renderer
  */
@@ -100,14 +100,24 @@ renderer.setSize(sizes.width, sizes.height)
 document.body.appendChild(renderer.domElement)
 
 /**
+ * Controls
+ */
+const cameraControls = new OrbitControls(camera, renderer.domElement)
+cameraControls.zoomSpeed = 0.3
+cameraControls.enableDamping = true
+
+/**
  * Loop
  */
 const loop = () =>
 {
     window.requestAnimationFrame(loop)
 
-    // Update mesh
-    houseGroup.rotation.y += 0.01
+    // // Update mesh
+    // houseGroup.rotation.y += 0.01
+
+    // Update orbit controls
+    cameraControls.update()
 
     // Render
     renderer.render(scene, camera)

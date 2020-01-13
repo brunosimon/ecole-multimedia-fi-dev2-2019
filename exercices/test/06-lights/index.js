@@ -68,69 +68,65 @@ window.addEventListener('mousemove', (_event) =>
 /**
  * Lights
  */
-const pointLight = new THREE.PointLight(0xffffff, 1, 10)
-pointLight.position.x = 10
-pointLight.position.y = 3
-pointLight.position.z = 5
+
+const ambientLight = new THREE.AmbientLight(0xffffff, 0.15)
+scene.add(ambientLight)
+
+const directionalLight = new THREE.DirectionalLight(0xffffff, 0.3)
+directionalLight.position.x = 5
+directionalLight.position.z = 5
+scene.add(directionalLight)
+
+const hemisphereLight = new THREE.HemisphereLight(0xff0000, 0x0000ff, 0.3)
+scene.add(hemisphereLight)
+
+const pointLight = new THREE.PointLight(0xff9000, 0.5)
+pointLight.position.x = - 5
+pointLight.position.y = 2
+pointLight.position.z = 2
 scene.add(pointLight)
 
+const rectAreaLight = new THREE.RectAreaLight(0x4e00ff, 3, 5, 5)
+rectAreaLight.position.x = 5
+rectAreaLight.position.z = 5
+rectAreaLight.position.y = - 3
+rectAreaLight.lookAt(new THREE.Vector3())
+scene.add(rectAreaLight)
+
+const spotLight = new THREE.SpotLight(0x00ff9c, 1, 0, Math.PI * 0.2, 0.5)
+spotLight.position.z = 5
+spotLight.position.x = - 5
+spotLight.position.y = 2
+scene.add(spotLight)
+
+spotLight.target.position.z = 0
+spotLight.target.position.x = - 1
+scene.add(spotLight.target)
+
+/**
+ * Lights helpers
+ */
+const directionalLightHelper = new THREE.DirectionalLightHelper(directionalLight)
+scene.add(directionalLightHelper)
+
+const hemisphereLightHelper = new THREE.HemisphereLightHelper(hemisphereLight)
+scene.add(hemisphereLightHelper)
+
+const pointLightHelper = new THREE.PointLightHelper(pointLight)
+scene.add(pointLightHelper)
+
+const spotLightHelper = new THREE.SpotLightHelper(spotLight)
+scene.add(spotLightHelper)
 
 /**
  * Objects
  */
-// // Mesh basic material
-// const material = new THREE.MeshBasicMaterial()
 
-// material.color = new THREE.Color(0x8888ff)
-// material.map = doorColorTexture
-// material.alphaMap = doorAlphaTexture
-// material.transparent = true
-// material.opacity = 0.8
-// material.wireframe = false
-// material.side = THREE.DoubleSide
-
-// // Mesh normal material
-// const material = new THREE.MeshNormalMaterial()
-
-// // Mesh matcap material
-// const material = new THREE.MeshMatcapMaterial({
-//     matcap: matcapSourceTexture
-// })
-
-// // Mesh lambert material
-// const material = new THREE.MeshLambertMaterial({
-//     color: new THREE.Color(0xffffff)
-// })
-
-// // Mesh phong material
-// const material = new THREE.MeshPhongMaterial({
-//     color: new THREE.Color(0xffffff),
-//     shininess: 100,
-//     specular: new THREE.Color(0x1188ff)
-// })
-
-// // Mesh toon material
-// const toonGradient = textureLoader.load('https://threejs.org/examples/textures/gradientMaps/threeTone.jpg')
-// toonGradient.magFilter = THREE.NearestFilter
-// toonGradient.minFilter = THREE.NearestFilter
-
-// const material = new THREE.MeshToonMaterial({
-//     color: new THREE.Color(0xffffff),
-//     shininess: 100,
-//     specular: new THREE.Color(0x1188ff),
-//     gradientMap: toonGradient
-// })
-
+// Material
 const material = new THREE.MeshStandardMaterial({
-    map: doorColorTexture,
-    aoMap: doorAmbientOcclusionTexture,
-    displacementMap: doorHeightTexture,
-    displacementScale: 0.2,
-    metalnessMap: doorMetalnessTexture,
-    normalMap: doorNormalTexture,
-    roughnessMap: doorColorRoughnessTexture,
-    alphaMap: doorAlphaTexture,
-    transparent: true
+    color: 0xffffff,
+    roughness: 0.3,
+    metalness: 0.3
 })
 
 // Sphere
@@ -147,7 +143,11 @@ const torusKnot = new THREE.Mesh(new THREE.TorusKnotGeometry(1.5, 0.5, 128, 16),
 torusKnot.position.x = 6
 scene.add(torusKnot)
 
-
+// Floor
+const floor = new THREE.Mesh(new THREE.PlaneBufferGeometry(20, 20, 1, 1), material)
+floor.position.y = - 3
+floor.rotation.x -= Math.PI * 0.5
+scene.add(floor)
 
 /**
  * Renderer
@@ -169,6 +169,23 @@ scene.add(camera)
 const cameraControls = new OrbitControls(camera, renderer.domElement)
 cameraControls.zoomSpeed = 0.3
 cameraControls.enableDamping = true
+
+// /**
+//  * Shadows
+//  */
+// renderer.shadowMap.enabled = true
+
+// sphere.castShadow = true
+// sphere.receiveShadow = true
+// plane.castShadow = true
+// plane.receiveShadow = true
+// torusKnot.castShadow = true
+// torusKnot.receiveShadow = true
+// floor.receiveShadow = true
+
+// directionalLight.castShadow = true
+// pointLight.castShadow = true
+// spotLight.castShadow = true
 
 /**
  * Loop

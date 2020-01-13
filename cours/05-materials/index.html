@@ -2,7 +2,7 @@
 <html lang="fr">
     <head>
         <meta charset="utf-8">
-        <title>Cours 04 - WebGL - Three.js</title>
+        <title>Cours 05 - WebGL - Three.js</title>
         <meta name="description" content="">
         <meta name="author" content="Bruno Simon">
         <meta name="apple-mobile-web-app-capable" content="yes">
@@ -31,7 +31,7 @@
 
                 <section>
                     <h1>WebGL</h1>
-                    <h3>Cours 04 - Materials</h3>
+                    <h3>Cours 05 - Materials</h3>
                     <ul>
                         <li>github :<br><a target="_blank" href="https://github.com/brunosimon/ecole-multimedia-fi-dev2">github.com/brunosimon/ecole-multimedia-fi-dev2</a></li>
                         <li>site :<br><a target="_blank" href="http://bruno-simon.com/ecole-multimedia/fi-dev2/">bruno-simon.com/ecole-multimedia/fi-dev2/</a></li>
@@ -56,6 +56,9 @@
                         <li><a href="#meshlambertmaterial">MeshLambertMaterial</a></li>
                         <li><a href="#meshphongmaterial">MeshPhongMaterial</a></li>
                         <li><a href="#meshtoonmaterial">MeshToonMaterial</a></li>
+                        <li><a href="#meshstandardmaterial">MeshStandardMaterial</a></li>
+                        <li><a href="#pointsmaterial">PointsMaterial</a></li>
+                        <li><a href="#shadermaterial">ShaderMaterial</a></li>
                     </ul>
                 </section>
 
@@ -135,7 +138,7 @@ const doorHeightTexture = textureLoader.load(doorHeightImageSource)
 const doorMetalnessTexture = textureLoader.load(doorMetalnessImageSource)
 const doorNormalTexture = textureLoader.load(doorNormalImageSource)
 const doorOpacityTexture = textureLoader.load(doorOpacityImageSource)
-const doorColorRougTexture = textureLoader.load(doorColorRoughnessSource)
+const doorColorRoughnessTexture = textureLoader.load(doorColorRoughnessSource)
 const matcapSourceTexture = textureLoader.load(matcapSource)
 
 /* ... */
@@ -301,6 +304,10 @@ const material = new THREE.MeshMatcapMaterial({
 
                 <!-- Lights -->
                 <section id="lights">
+                    <h2>Lights</h2>
+                </section>
+
+                <section>
                     <p>Les materials qui suivent réagissent à la lumière</p>
                     <p>Nous allons donc rajouter une simple lumière à notre scène et nous verrons tout ce qu'il est possible de faire dans un prochain chapitre</p>
                 </section>
@@ -404,6 +411,148 @@ const material = new THREE.MeshToonMaterial({
                         </tr>
                     </table>
                     <p>Exemple de dégradé<br><img style="image-rendering: pixelated;" width="200" src="https://threejs.org/examples/textures/gradientMaps/threeTone.jpg"></p>
+                </section>
+
+
+                <!-- MeshStandardMaterial -->
+                <section id="meshstandardmaterial">
+                    <h2 class="default">MeshStandardMaterial</h2>
+                </section>
+
+                <section>
+                    <p>Le <a target="_blank" href="https://threejs.org/docs/index.html#api/en/materials/MeshStandardMaterial">MeshStandardMaterial</a> est le nouveau standard pour les matériaux, pas seulement dans Three.js mais aussi dans de nombreux logiciels tels que <span class="u">Unreal Engine</span>, <span class="u">Blender</span>, <span class="u">Unity</span>, etc.</p>
+                    <p><span class="u">Physically based</span> correspond à une volonté de baser les paramètres d'une entité sur des valeurs physique proche de la réalité. Cela s'applique aux Materials, mais vous pouvez aussi retrouvez ça dans d'autres domaines tels que la physique, la génération procédurale, etc.</p>
+                    <p>Comme ce Material est standard, vous avez plus de chances d'obtenir le même résultat en passant d'un logiciel à l'autre</p>
+                </section>
+
+                <section>
+                    <p>Le MeshStandardMaterial rajoute deux principales notions qui sont le <span class="u">roughness</span> (a quel point l'objet est rugueux) et le <span class="u">metalness</span> (à quel point l'objet est métalique)</p>
+                    <ul>
+                        <li><a href="https://threejs.org/examples/?q=standa#webgl_materials_variations_standard" target="_blank">Exemple d'un objet</a></li>
+                        <li><a href="https://threejs.org/examples/?q=standa#webgl_materials_standard" target="_blank">Exemple des variations de roughness et metalness</a></li>
+                    </ul>
+                    <br>
+                    <br>
+                    <div class="code-steps" data-type="js" data-trim>
+                        <pre contenteditable><code>
+const material = new THREE.MeshStandardMaterial({
+    color: new THREE.Color(0xffffff),
+    metalness: 0.3,
+    roughness: 0.8
+})
+                        </code></pre>
+                    </div>
+                </section>
+
+                <section>
+                    <p>Nous pouvons utiliser divers <span class="u">map</span> pour avoir une répartition non uniforme</p>
+                    <div class="code-steps" data-type="js" data-trim>
+                        <pre contenteditable><code>
+const material = new THREE.MeshStandardMaterial({
+    map: doorColorTexture,
+    aoMap: doorAmbientOcclusionTexture,
+    displacementMap: doorHeightTexture,
+    displacementScale: 0.2,
+    metalnessMap: doorMetalnessTexture,
+    roughnessMap: doorColorRoughnessTexture,
+    normalMap: doorNormalTexture,
+    alphaMap: doorAlphaTexture,
+    transparent: true
+})
+
+/* ... */
+
+// Plane
+const plane = new THREE.Mesh(new THREE.PlaneGeometry(4, 4, 100, 100), material)
+scene.add(plane)
+                        </code></pre>
+                    </div>
+                </section>
+
+                <section>
+                    <table>
+                        <tr>
+                            <td><span class="u">gradientMap</span></td>
+                            <td>Dégradé permettant de définir le nombre d'étape dans le shading</td>
+                            <td>THREE.Texture</td>
+                        </tr>
+                    </table>
+                    <p>Exemple de dégradé<br><img style="image-rendering: pixelated;" width="200" src="https://threejs.org/examples/textures/gradientMaps/threeTone.jpg"></p>
+                </section>
+
+                <section>
+                    <table>
+                        <tr>
+                            <td><span class="u">map</span></td>
+                            <td>Texture de couleur</td>
+                            <td>THREE.Texture</td>
+                        </tr>
+                        <tr>
+                            <td><span class="u">aoMap</span></td>
+                            <td>Texture des ombres (en plus des ombres en temps réel)</td>
+                            <td>THREE.Texture</td>
+                        </tr>
+                    </table>
+                </section>
+
+                <section>
+                    <table>
+                        <tr>
+                            <td><span class="u">displacementMap</span></td>
+                            <td>Texture de l'épaisseur qui s'appliquera à chaque vertice (il faut augmenter le nombre de vertices)</td>
+                            <td>THREE.Texture</td>
+                        </tr>
+                        <tr>
+                            <td><span class="u">displacementScale</span></td>
+                            <td>Multiplicateur du displacementMap</td>
+                            <td>Float</td>
+                        </tr>
+                        <tr>
+                            <td><span class="u">metalnessMap</span></td>
+                            <td>Texture de metalness (blanc = métallique, noir = non métallique)</td>
+                            <td>THREE.Texture</td>
+                        </tr>
+                    </table>
+                </section>
+
+                <section>
+                    <table>
+                        <tr>
+                            <td><span class="u">roughnessMap</span></td>
+                            <td>Texture de roughness (blanc = rugueux, noir = non rugueux)</td>
+                            <td>THREE.Texture</td>
+                        </tr>
+                        <tr>
+                            <td><span class="u">normalMap</span></td>
+                            <td>Texture de normal (simule des inclinaisons)</td>
+                            <td>THREE.Texture</td>
+                        </tr>
+                        <tr>
+                            <td><span class="u">alphaMap</span></td>
+                            <td>Texture de transparence (blanc = visible, noir = invisible)</td>
+                            <td>THREE.Texture</td>
+                        </tr>
+                    </table>
+                </section>
+
+                <!-- PointsMaterial -->
+                <section id="pointsmaterial">
+                    <h2 class="default">PointsMaterial</h2>
+                </section>
+
+                <section>
+                    <p>Le <a target="_blank" href="https://threejs.org/docs/index.html#api/en/materials/PointsMaterial">PointsMaterial</a> sert à gérer le material des particules</p>
+                    <p>Nous verrons ce matérial sur le cours dédié aux particules</p>
+                </section>
+
+                <!-- ShaderMaterial -->
+                <section id="shadermaterial">
+                    <h2 class="default">ShaderMaterial</h2 class="default">
+                </section>
+
+                <section>
+                    <p>Le <a target="_blank" href="https://threejs.org/docs/index.html#api/en/materials/ShaderMaterial">ShaderMaterial</a> sert à créer nos propres shaders</p>
+                    <p>Nous verrons ce matérial sur le cours dédié aux shaders</p>
                 </section>
 
             </div>
