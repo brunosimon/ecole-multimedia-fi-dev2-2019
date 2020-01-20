@@ -1,9 +1,9 @@
 import * as THREE from 'three'
 import { OrbitControls } from 'three/examples/jsm/controls/OrbitControls.js'
-import tabelImageSource from './assets/images/tabl.jpg'
-import platImageSource from './assets/images/pplat.jpg'
-import gateauImageSource from './assets/images/10709459-chocolate-cake-texture.jpg'
-import bougImageSource from './assets/images/SoilMud0027_1_download600.jpg'
+import tabelImageSource from './assets/tabl.jpg'
+import platImageSource from './assets/plat.jpg'
+import gateauImageSource from './assets/cakke.jpg'
+import bougImageSource from './assets/bougi.jpg'
 import { Texture, TextureLoader } from 'three'
 
 
