@@ -82,7 +82,7 @@
                     <p><a href="https://threejs.org/docs/#examples/en/postprocessing/EffectComposer" target="_blank">EffectComposer</a> ne faisant pas parti de Three.js en natif, il faut l'importer avant de l'initialiser avec le <span class="hl">renderer</span> en paramètre</p>
                     <div class="code-steps" data-type="js" data-trim>
                         <pre contenteditable><code>
-import { EffectComposer } from './jsm/postprocessing/EffectComposer.js'
+import { EffectComposer } from 'three/examples/jsm/postprocessing/EffectComposer.js'
 
 const effectComposer = new EffectComposer(renderer)
                         </code></pre>
@@ -127,6 +127,10 @@ const loop = () =>
                     <p>La première passe qu'il faut presque toujours ajouter est un simple rendu de la scène appelé <span class="hl">RenderPass</span></p>
                     <div class="code-steps" data-type="js" data-trim>
                         <pre contenteditable><code>
+import { RenderPass } from 'three/examples/jsm/postprocessing/RenderPass.js'
+
+/* ... */
+
 const effectComposer = new EffectComposer(renderer)
 
 const renderPass = new RenderPass(scene, camera)
@@ -374,7 +378,9 @@ void main()
 {
     vec4 color = texture2D(tDiffuse, vUv);
 
-    color.rgb += (random(vUv) - 0.5) * 0.35;
+    color.r += (random(vUv + 0.0) - 0.5) * 0.35;
+    color.g += (random(vUv + 0.1) - 0.5) * 0.35;
+    color.b += (random(vUv + 0.2) - 0.5) * 0.35;
 
     gl_FragColor = color;
 }

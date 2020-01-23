@@ -1,6 +1,6 @@
 import * as THREE from 'three'
 import { OrbitControls } from 'three/examples/jsm/controls/OrbitControls.js'
-import { GLTFLoader } from 'three/examples/jsm/loaders/GLTFLoader'
+import { GLTFLoader } from 'three/examples/jsm/loaders/GLTFLoader.js'
 import { DRACOLoader } from 'three/examples/jsm/loaders/DRACOLoader.js'
 import { EffectComposer } from 'three/examples/jsm/postprocessing/EffectComposer.js'
 import { RenderPass } from 'three/examples/jsm/postprocessing/RenderPass.js'
@@ -9,9 +9,10 @@ import { DotScreenShader } from 'three/examples/jsm/shaders/DotScreenShader.js'
 import { RGBShiftShader } from 'three/examples/jsm/shaders/RGBShiftShader.js'
 import { PixelShader } from 'three/examples/jsm/shaders/PixelShader.js'
 import { UnrealBloomPass } from 'three/examples/jsm/postprocessing/UnrealBloomPass.js'
+import { GlitchPass } from 'three/examples/jsm/postprocessing/GlitchPass.js'
 
 /**
- * GLTF Loader
+ * GLTFLoader
  */
 const dracoLoader = new DRACOLoader()
 dracoLoader.setDecoderPath('/draco/')
@@ -48,9 +49,8 @@ window.addEventListener('resize', () =>
     // Update effect composer
     effectComposer.setSize(sizes.width, sizes.height)
 
-    // // Update passes
-    // pixelPass.uniforms.resolution.value.x = sizes.width
-    // pixelPass.uniforms.resolution.value.y = sizes.height
+    pixelPass.uniforms.resolution.value.x = sizes.width
+    pixelPass.uniforms.resolution.value.y = sizes.height
 
     // Update camera
     camera.aspect = sizes.width / sizes.height
@@ -75,92 +75,48 @@ window.addEventListener('mousemove', (_event) =>
  */
 const camera = new THREE.PerspectiveCamera(75, sizes.width / sizes.height, 0.1, 10000)
 camera.position.z = 2
+camera.position.y = 0.2
 scene.add(camera)
 
 /**
  * Renderer
  */
 const renderer = new THREE.WebGLRenderer()
-renderer.setSize(sizes.width, sizes.height)
 renderer.setClearColor(0xffffff, 1)
+renderer.setSize(sizes.width, sizes.height)
 document.body.appendChild(renderer.domElement)
 
 /**
- * Orbit controls
- */
-const controls = new OrbitControls(camera, renderer.domElement)
-controls.enableDamping = true
-controls.zoomSpeed = 0.3
-
-/**
- * Lights
- */
-const ambientLight = new THREE.AmbientLight(0xffffff, 0.5)
-scene.add(ambientLight)
-
-const directionalLight = new THREE.DirectionalLight(0xffffff, 2)
-directionalLight.position.x = 5
-directionalLight.position.y = 5
-directionalLight.position.z = 5
-scene.add(directionalLight)
-
-/**
- * Model
- */
-const modelGroup = new THREE.Group()
-modelGroup.scale.set(1, 1, 1)
-modelGroup.rotation.y = - Math.PI * 0.5
-scene.add(modelGroup)
-
-gltfLoader.load(
-    'models/DamagedHelmet.glb',
-    (gltf) =>
-    {
-        console.log('success')
-        while(gltf.scene.children.length)
-        {
-            const child = gltf.scene.children[0]
-            modelGroup.add(child)
-        }
-    }
-)
-
-/**
- * Postprocess
+ * Effect composer
  */
 const effectComposer = new EffectComposer(renderer)
 
 const renderPass = new RenderPass(scene, camera)
 effectComposer.addPass(renderPass)
 
-// // Dot pass
-// const dotPass = new ShaderPass(DotScreenShader)
-// dotPass.uniforms.scale.value = 2
-// effectComposer.addPass(dotPass)
+const dotScreenPass = new ShaderPass(DotScreenShader)
+dotScreenPass.uniforms.scale.value = 3
+// effectComposer.addPass(dotScreenPass)
 
-// // RGB Shift pass
-// const rgbShiftPass = new ShaderPass(RGBShiftShader)
-// rgbShiftPass.uniforms.amount.value = 0.005
-// effectComposer.addPass(rgbShiftPass)
+const rgbShiftPass = new ShaderPass(RGBShiftShader)
+rgbShiftPass.uniforms.amount.value = 0.003
+effectComposer.addPass(rgbShiftPass)
 
-// // Pixel pass
-// const pixelPass = new ShaderPass(PixelShader)
-// pixelPass.uniforms.pixelSize.value = 10
-// pixelPass.uniforms.resolution.value = new THREE.Vector2(sizes.width, sizes.height)
+const pixelPass = new ShaderPass(PixelShader)
+pixelPass.uniforms.pixelSize.value = 10
+pixelPass.uniforms.resolution.value = new THREE.Vector2(sizes.width, sizes.height)
 // effectComposer.addPass(pixelPass)
 
-// // Unreal pass
-// const unrealPass = new UnrealBloomPass(new THREE.Vector2(sizes.width, sizes.height))
-// unrealPass.strength = 0.6
-// unrealPass.radius = 0.4
-// unrealPass.threshold = 0.05
-// effectComposer.addPass(unrealPass)
+const unrealBloomPass = new UnrealBloomPass(new THREE.Vector2(sizes.width, sizes.height))
+unrealBloomPass.strength = 0.6
+unrealBloomPass.radius = 0.4
+unrealBloomPass.threshold = 0.05
+effectComposer.addPass(unrealBloomPass)
 
-// Custom pass
 const customPass = new ShaderPass({
     vertexShader: `
         varying vec2 vUv;
-
+        
         void main()
         {
             vUv = uv;
@@ -176,14 +132,28 @@ const customPass = new ShaderPass({
         {
             return fract(sin(dot(st.xy, vec2(12.9898,78.233))) * 43758.5453123);
         }
-
+    
         void main()
         {
             vec4 color = texture2D(tDiffuse, vUv);
 
-            color.r += (random(vUv + 0.0) - 0.5) * 0.35;
-            color.g += (random(vUv + 0.1) - 0.5) * 0.35;
-            color.b += (random(vUv + 0.2) - 0.5) * 0.35;
+            // // Tint
+            // color.r *= 1.5;
+
+            // Vignette
+            float vignette = 1.0 - distance(vUv, vec2(0.5, 0.5));
+            color.rgb *= vec3(vignette);
+
+            // Noise
+            color.r += (random(vUv + 0.0) - 0.5) * 0.25;
+            color.g += (random(vUv + 0.4) - 0.5) * 0.25;
+            color.b += (random(vUv + 0.9) - 0.5) * 0.25;
+
+            // // Black and white
+            // float grey = (color.r + color.g + color.b) / 3.0;
+            // color.r = grey;
+            // color.g = grey;
+            // color.b = grey;
 
             gl_FragColor = color;
         }
@@ -193,7 +163,57 @@ const customPass = new ShaderPass({
         tDiffuse: { value: null }
     }
 })
-effectComposer.addPass(customPass)
+// effectComposer.addPass(customPass)
+
+const glitchPass = new GlitchPass()
+// glitchPass.goWild = true
+// glitchPass.enabled = false
+effectComposer.addPass(glitchPass)
+
+/**
+ * Orbit controls
+ */
+const controls = new OrbitControls(camera, renderer.domElement)
+controls.enableDamping = true
+controls.zoomSpeed = 0.3
+
+/**
+ * Lights
+ */
+const ambientLight = new THREE.AmbientLight(0xffffff, 0.2)
+scene.add(ambientLight)
+
+const directionalLight = new THREE.DirectionalLight(0xffffff, 1)
+directionalLight.position.x = 5
+directionalLight.position.y = 5
+directionalLight.position.z = 5
+scene.add(directionalLight)
+
+/**
+ * Model
+ */
+
+// Load model
+const spaceshipGroup = new THREE.Group()
+scene.add(spaceshipGroup)
+
+gltfLoader.load(
+    'models/DamagedHelmet.glb',
+    (gltf) =>
+    {
+        while(gltf.scene.children.length)
+        {
+            const child = gltf.scene.children[0]
+            spaceshipGroup.add(child)
+        }
+    },
+    undefined,
+    (error) =>
+    {
+        console.log('error')
+        console.log(error)
+    }
+)
 
 /**
  * Loop
