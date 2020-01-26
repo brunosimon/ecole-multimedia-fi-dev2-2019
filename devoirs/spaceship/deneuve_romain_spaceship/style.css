@@ -1,0 +1,53 @@
+*
+{
+    margin: 0;
+    padding: 0;
+}
+
+html,
+body
+{
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+}
+
+canvas
+{
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    z-index: -1;
+}
+
+/* .information{
+    position: absolute;
+    padding: 10px;
+    display: flex
+
+}
+
+.information2{
+    position: absolute;
+    padding: 10px;
+    display: flex
+
+}
+
+.information3{
+    position: absolute;
+    padding: 10px;
+    display: flex
+
+}
+
+.information4{
+    position: absolute;
+    padding: 10px;
+    display: flex
+
+} */

@@ -177,13 +177,13 @@ const sphereGeometry = new THREE.SphereBufferGeometry(5, 32, 32)
                     <p>Il est possible de récupérer le pixel ratio de l'écran concerné avec <span class="hl">window.devicePixelRatio</span></p>
                     <div class="code-steps" data-type="js" data-trim>
                         <pre contenteditable><code>
-renderer.setPixel(window.devicePixelRatio)
+renderer.setPixelRatio(window.devicePixelRatio)
                         </code></pre>
                     </div>
                     <p>Le mieux est de le limiter à 2 car, au dela, cela pose trop de problèmes de performance</p>
                     <div class="code-steps" data-type="js" data-trim>
                         <pre contenteditable><code>
-renderer.setPixel(Math.min(window.devicePixelRatio, 2))
+renderer.setPixelRatio(Math.min(window.devicePixelRatio, 2))
                         </code></pre>
                     </div>
                 </section>

@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <title>13 No Mercy 3D</title>
+  <link rel="stylesheet" href="style.css">
+</head>
+
+<body>
+  <!--Game Audios-->
+  <audio id="space-theme" src="./assets/songs/space_theme.mp3" loop="true" hidden="true"></audio>
+  <audio id="asteroid_explosion" src="./assets/songs/asteroid_explosion.mp3" hidden="true"></audio>
+  <audio id="spaceship_explosion" src="./assets/songs/spaceship_explosion.mp3" hidden="true"></audio>
+  <audio id="missile_sound" src="./assets/songs/missile_sound.mp3" hidden="true"></audio>
+  <audio id="spaceship_alert" src="./assets/songs/spaceship_alert.mp3" hidden="true"></audio>
+
+  <!--Game Menu-->
+  <div class="welcome-ctnr">
+    <h1>No Mercy 3D</h1>
+    <div class="controls-ctnr">
+      <h2>Controls</h2>
+      <p>Z : Up</p>
+      <p>S : Dowm</p>
+      <p>Q : Left</p>
+      <p>D : Right</p>
+      <p>Space : Shoot</p>
+      <p>O : Mute</p>
+    </div>
+    <p>Press <span>enter</span> to start the game</p>
+  </div>
+
+  <!--Game HUD-->
+  <div class="infoBox">
+    <h2 id="chronotime" class="infoStyle"></h2>
+    <h2 id="speed" class="infoStyle"></h2>
+    <h2 id="score" class="infoStyle"></h2>
+  </div>
+
+  <div id="life-ctnr">
+    <div class="life life-1"></div>
+    <div class="life life-2"></div>
+    <div class="life life-3"></div>
+    <div class="life life-4"></div>
+  </div>
+
+  <!--Game Over-->
+  <div id="game-over">
+    <h2>Game Over</h2>
+    <p>Press <span>R</span> to restart</p>
+  </div>
+
+  <script src="script.js"></script>
+
+</body>
+
+</html>

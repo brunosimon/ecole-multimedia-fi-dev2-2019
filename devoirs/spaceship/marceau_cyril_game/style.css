@@ -1,0 +1,113 @@
+*
+{
+    margin: 0;
+    padding: 0;
+}
+
+html,
+body
+{
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+}
+
+canvas
+{
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    z-index: -1;
+}
+
+
+.control{
+    width: 100%;
+    color: white;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+}
+
+.control div{
+    margin-top: 40px;
+    width: 160px;
+    height: auto;
+    border: 1px solid white;
+    padding: 10px;
+    border-radius: 15px;
+}
+
+.control p {
+    padding-bottom: 20px;
+    padding-top: 20px;
+    font-size: 25px;
+}
+
+.title{
+    z-index: 3;
+    color: white;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 35px;
+}
+
+.start{
+    margin-top: 40px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: white;
+    font-size: 25px;
+}
+
+.start span{
+    color: black;
+    background-color: white;
+    padding: 5px;
+    border-radius: 20px;
+    cursor: pointer;
+}
+
+.timer{
+    z-index: 4;
+    color: white;
+    margin-top: 2%;
+    margin-left: 1%;
+}
+
+.score{
+    z-index: 4;
+    color: white;
+    margin-top: 4%;
+    margin-left: 1%;
+}
+
+.score p{
+    color: white;
+}
+
+.timer p{
+    color: white;
+}
+
+.restart{
+    display: none;
+    width: 100%;
+    height: 100%;
+    z-index: 10;
+    color: black;
+    padding-top: 200px;
+    align-items: center;
+    justify-content: center;
+}
+
+.restart h1{
+    color: black;
+}

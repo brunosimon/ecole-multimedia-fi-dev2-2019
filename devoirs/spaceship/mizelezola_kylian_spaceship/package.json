@@ -1,0 +1,20 @@
+{
+    "name": "01-basics",
+    "version": "1.0.0",
+    "description": "",
+    "main": "script.js",
+    "scripts": {
+        "dev": "parcel index.html --open"
+    },
+    "keywords": [],
+    "author": "",
+    "license": "ISC",
+    "devDependencies": {
+        "parcel-bundler": "^1.12.4",
+        "parcel-plugin-static-files-copy": "^2.2.2",
+        "three": "^0.112.1"
+    },
+    "dependencies": {
+        "assets": "^3.0.1"
+    }
+}

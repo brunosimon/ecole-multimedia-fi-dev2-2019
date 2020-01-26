@@ -1,0 +1,76 @@
+*
+{
+    margin: 0;
+    padding: 0;
+}
+
+html,
+body
+{
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+}
+
+canvas
+{
+    z-index: 0;
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+}
+
+#introduction
+{
+    z-index: 2;
+
+    position: absolute;
+    margin-left: 20%;
+    margin-top: 2%;
+
+    width: 50%;
+    height: 70%;
+    background-color: rgba(0, 1, 0, 0.7);
+
+    padding: 5%;
+    text-align: center;
+    font-size: 1.2em;
+    color: red;
+    font-family: Arial, Helvetica, sans-serif;
+}
+
+#chronotime
+{
+    z-index: 1;
+
+    position: absolute;
+    margin-left: 40%;
+    margin-top: 2%;
+
+    width: 30%;
+    height: 30%;
+
+    font-size: 2em;
+    color: red;
+    font-family: Arial, Helvetica, sans-serif;
+}
+
+#finishTime
+{
+    z-index: 1;
+
+    position: absolute;
+    margin-left: 40%;
+    margin-top: 2%;
+
+    width: 30%;
+    height: 30%;
+
+    font-size: 2em;
+    color: red;
+    font-family: Arial, Helvetica, sans-serif;
+}

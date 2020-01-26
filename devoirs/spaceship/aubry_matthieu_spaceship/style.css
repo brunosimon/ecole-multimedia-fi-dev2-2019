@@ -1,0 +1,170 @@
+*
+{
+    margin: 0;
+    padding: 0;
+}
+
+html, body
+{
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+}
+
+canvas
+{
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    z-index: -1;
+}
+
+.infoBox
+{
+    position: absolute;
+    z-index: 1;
+    top: 25px;
+    left: 30px;
+}
+
+.infoStyle
+{
+    color: red;
+    font-size: 40px;
+}
+
+.welcome-ctnr
+{
+    position: absolute;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    top: calc(50% - 390px);
+    left: calc(50% - 450px);
+    width: 900px;
+    height: 780px;
+}
+
+.welcome-ctnr h1
+{
+    margin-top: 10px;
+    color: red;
+    font-size: 100px;
+}
+
+.welcome-ctnr p
+{
+    color: white;
+    font-size: 40px;
+    margin: 80px;
+}
+
+.welcome-ctnr span
+{
+    color: red;
+}
+
+.controls-ctnr p
+{
+    color: white;
+    font-size: 30px;
+    margin: 10px;
+}
+
+.controls-ctnr
+{
+    margin-top: 150px;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    background-color: black;
+    opacity: 0.5;
+    border: 1px solid red;
+    border-radius: 5px;
+    height: 40%;
+    width: 40%;
+}
+
+.controls-ctnr h2
+{
+    color: white;
+    font-size: 40px;
+}
+
+.controls-ctnr p
+{
+    color: white;
+    font-size: 20px;
+}
+
+#game-over
+{
+    display: none;
+    position: absolute;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    top: calc(50% - 390px);
+    left: calc(50% - 450px);
+    width: 900px;
+    height: 780px;
+}
+
+#game-over h2
+{
+    color: red;
+    font-size: 100px;
+}
+
+#game-over p
+{
+    color: white;
+    font-size: 40px;
+    margin: 80px;
+}
+
+#game-over span
+{
+    color: red;
+}
+
+#life-ctnr
+{
+    position: absolute;
+    width: 450px;
+    height: 50;
+    z-index: 1;
+    top: 25px;
+    right: 30px;
+    display: none;
+}
+
+.life
+{
+    width: 25%;
+    height: 50px;
+    background-color: red;
+    color: white;
+}
+
+.life-1{
+    display: block;
+}
+
+.life-2{
+    display: block;
+}
+
+.life-3{
+    display: block;
+}
+
+.life-4{
+    display: block;
+}

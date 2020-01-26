@@ -1,0 +1,12 @@
+{
+  "dependencies": {
+    "parcel-bundler": "1.12.4",
+    "three": "^0.112.1"
+  },
+  "devDependencies": {
+    "parcel-plugin-static-files-copy": "^2.3.1"
+  },
+  "scripts": {
+    "dev": "parcel index.html --open"
+  }
+}
