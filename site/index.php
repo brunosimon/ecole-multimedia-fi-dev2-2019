@@ -49,7 +49,7 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <title>Développement Web - FI DEV 2 - Bruno Simon</title>
+    <title>Développement Web - FI DEV2 2019 - Bruno Simon</title>
     <meta name="viewport" content="width=device-width,initial-scale=1.0,minimum-scale=1.0,maximum-scale=1.0,user-scalable=no">
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
 </head>
@@ -58,7 +58,7 @@
     <!-- Nav -->
     <nav class="navbar navbar-dark bg-dark">
         <div class="container-fluid">
-            <a class="navbar-brand" href="#">FI DEV2 - Dév<span class="hidden-xs">eloppement</span> Web</a>
+            <a class="navbar-brand" href="#">FI DEV2 2019 - Dév<span class="hidden-xs">eloppement</span> Web</a>
             <ul class="nav navbar-nav navbar-right">
                 <li><a class="btn btn-light" href="https://github.com/brunosimon/ecole-multimedia-fi-dev2" target="_blank">GitHub</a></li>
             </ul>
