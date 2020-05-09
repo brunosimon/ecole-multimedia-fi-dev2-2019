@@ -1,0 +1,143 @@
+
+<!doctype html>
+<html lang="fr">
+    <head>
+        <meta charset="utf-8">
+        <title>Cours 18 - Portfolio - Compatibilité</title>
+        <meta name="description" content="">
+        <meta name="author" content="Bruno Simon">
+        <meta name="apple-mobile-web-app-capable" content="yes">
+        <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+        <link rel="stylesheet" href="../src/reveal.js/css/reveal.css">
+        <link rel="stylesheet" href="../src/reveal.js/css/theme/orange.css" id="theme">
+        <!-- <link rel="stylesheet" href="../src/reveal.js/lib/css/highlight/railscasts.css"> -->
+        <!-- <link rel="stylesheet" href="../src/reveal.js/lib/css/highlight/github.css"> -->
+        <link rel="stylesheet" href="../src/custom/style.css">
+        <script>
+            document.write( '<link rel="stylesheet" href="../src/reveal.js/css/print/' + ( window.location.search.match( /print-pdf/gi ) ? 'pdf' : 'paper' ) + '.css" type="text/css" media="print">' );
+        </script>
+        <!--[if lt IE 9]>
+            <script src="../src/reveal.js/lib/js/html5shiv.js"></script>
+        <![endif]-->
+
+        <!-- Code steps start -->
+        <link rel="stylesheet" href="../src/code-steps/prism-tomorrow.css">
+        <link rel="stylesheet" href="../src/code-steps/style.css">
+        <!-- Code steps end -->
+    </head>
+    <body>
+        <div class="reveal">
+            <div class="slides">
+
+                <section>
+                    <h1>WebGL</h1>
+                    <h3>Cours 18 - Portfolio - Compatibilité</h3>
+                    <small>
+                        <ul>
+                            <li>github : <a target="_blank" href="https://github.com/brunosimon/ecole-multimedia-fi-dev2-2019">github.com/brunosimon/ecole-multimedia-fi-dev2-2019</a></li>
+                            <li>site : <a target="_blank" href="http://bruno-simon.com/ecole-multimedia/fi-dev2-2019/">bruno-simon.com/ecole-multimedia/fi-dev2-2019/</a></li>
+                            <li>contact : <a target="_blank" mailto="simon.bruno.77@gmail.com">simon.bruno.77@gmail.com</a></li>
+                        </ul>
+                    </small>
+                </section>
+
+                <section>
+                    <p>Comme il s'agit d'un portfolio, il est inutile de trop pousser la compatibilité</p>
+                    <p>Vous devez vous assurez que le site fonctionne pour la majorité des recruteurs et de la communauté</p>
+                </section>
+
+                <section>
+                    <h2>Navigateurs</h2>
+                </section>
+
+                <section>
+                    <p>Dernières versions des navigateurs récents</p>
+                    <ul>
+                        <li><a href="https://gs.statcounter.com/" target="_blank">gs.statcounter.com</a></li>
+                        <li><a href="https://www.w3counter.com/globalstats.php" target="_blank">www.w3counter.com/globalstats.php</a></li>
+                        <li><a href="https://www.w3schools.com/browsers/" target="_blank">www.w3schools.com/browsers/</a></li>
+                        <li><a href="https://caniuse.com/#feat=webgl" target="_blank">caniuse.com/#feat=webgl</a> (en fonction des features utilisées)</li>
+                    </ul>
+                </section>
+
+                <section>
+                    <p>☝️ Chrome, Chrome mobile, Edge et Safari utilisent le même moteur</p>
+                </section>
+
+                <section>
+                    <h2>Responsive</h2>
+                </section>
+
+                <section>
+                    <p>Gestion des tailles d'écrans</p>
+                    <ul>
+                        <li>Landscape et portrait</li>
+                        <li>Descend jusqu'à 320px (et encore)</li>
+                        <li>Agréable sur très large résolution</li>
+                    </ul>
+                </section>
+
+                <section>
+                    <p>Gestion du touch</p>
+                </section>
+
+                <section>
+                    <p>Scroll fluide et vitesse constante quelque soit l'OS et le type de souris / trackpad</p>
+                </section>
+
+                <section>
+                    <p>Gestion du pixel ratio</p>
+                </section>
+
+                <section>
+                    <h2>Poids</h2>
+                </section>
+
+                <section>
+                    <ul>
+                        <li>Essayez de charger les assets importants en premier et le reste plus tard (images, autres pages, vidéos, models 3D, etc.)</li>
+                        <li>Méfiez vous du poids des typos</li>
+                        <li>Redimensionnez les images</li>
+                        <li>Utilisez <span class="hl">srcset</span></li>
+                        <li>Compressez les images, les vidéo, et les sons</li>
+                        <li>Utilisez des formats d'image adaptés</li>
+                        <li>Appliquer la compression gzip sur le serveur</li>
+                        <li>Méfiez vous des tests en local et activez le <span class="hl">network throttling</span></li>
+                    </ul>
+                </section>
+
+                <section>
+                    <p>Si votre site est malgré tout trop lourd, ajoutez un loader</p>
+                    <p>Le loader peut faire office d'introduction 😉</p>
+                </section>
+
+                <section>
+                    <h2>Performance</h2>
+                </section>
+
+                <section>
+                    <p>Votre site doit être performant quelque soit le device (mobile, tablette, chromebook, pixel ratio élevé, framerate élevé)</p>
+                    <ul>
+                        <li>Optimisez le code</li>
+                        <li>Ne mettez à jour que ce qui est visible à l'écran</li>
+                        <li>Méfiez vous des pixel ratio supérieur à 2</li>
+                        <li>Méfiez vous des écrans à framerate supérieurs à 60</li>
+                        <li>Dégradez éventuellement l'expérience sur mobile</li>
+                    </ul>
+                </section>
+
+            </div>
+        </div>
+
+        <script src="../src/reveal.js/lib/js/head.min.js"></script>
+        <script src="../src/reveal.js/js/reveal.js"></script>
+        <script src="../src/custom/script.js"></script>
+
+        <!-- Code steps start -->
+        <script src="../src/code-steps/prism.js" data-manual></script>
+        <!-- Code steps end -->
+
+        <script type="module" src="../src/custom/script-module.js"></script>
+    </body>
+</html>
